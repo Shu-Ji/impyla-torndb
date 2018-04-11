@@ -1,0 +1,72 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "f3585f7bc3bcbeeeec2d9f88b9cb5981c8e945ecded11fcb00a445da8710f92d"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "2.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "bitarray": {
+            "hashes": [
+                "sha256:7da501356e48a83c61f479393681c1bc4b94e5a34ace7e08cb29e7dd9290ab18"
+            ],
+            "version": "==0.8.1"
+        },
+        "impyla": {
+            "hashes": [
+                "sha256:107db13fea0dcf38c311112b079c305c3b367e99f108df38ebcae87fd6a808f8",
+                "sha256:b414f45c89e2b28fc9c49d79bdd9dab25abda4ba3cd450d562711cbdd2a6700a"
+            ],
+            "index": "pypi",
+            "version": "==0.14.1"
+        },
+        "kazoo": {
+            "hashes": [
+                "sha256:a29fa579812a2c5dd8241eafb8328b8a8673f140903a6102e017129aa223d0c7",
+                "sha256:a7c2d1d7ddb047c936d368e31b08a93bb327ffa46606fe85f550a37ce608c29b"
+            ],
+            "index": "pypi",
+            "version": "==2.4.0"
+        },
+        "pure-sasl": {
+            "git": "https://github.com/thobbs/pure-sasl.git"
+        },
+        "sasl": {
+            "hashes": [
+                "sha256:04f22e17bbebe0cd42471757a48c2c07126773c38741b1dad8d9fe724c16289d"
+            ],
+            "version": "==0.2.1"
+        },
+        "six": {
+            "hashes": [
+                "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
+                "sha256:832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb"
+            ],
+            "version": "==1.11.0"
+        },
+        "thrift": {
+            "hashes": [
+                "sha256:dfbc3d3bd19d396718dab05abaf46d93ae8005e2df798ef02e32793cd963877e"
+            ],
+            "version": "==0.9.3"
+        },
+        "thrift-sasl": {
+            "hashes": [
+                "sha256:dabbca1868731b95713704c97f15b26c4e069af698e40fd99f09d3c6659dfda7"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
+        }
+    },
+    "develop": {}
+}
