@@ -13,6 +13,8 @@ Only `db.execute` will return None, while `torndb.execute` returns lastrowid.
 Please read the source code, it's very simple.
 
 
+支持以 zk 的方式连接 hs2。
+
 封装一下 impyla，让其使用起来和 torndb 一样简单好用。
 
 提供 db.query、db.get、db.execute 三个方法，用法和 torndb 完全一样。
