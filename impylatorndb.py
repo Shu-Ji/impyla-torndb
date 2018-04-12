@@ -33,7 +33,8 @@ class Connection(object):
         kwargs = self.connection_params
 
         if kwargs.zookeeper_address_str:
-            kwargs.host, kwargs.port = self.get_hs2_server_address()
+            kwargs.host, kwargs.port = self.get_hs2_server_address(
+                    kwargs.zookeeper_address_str)
 
         self.close(self.conn)
         self.conn = connect(**kwargs)
@@ -101,12 +102,12 @@ class Connection(object):
     def __del__(self):
         self.close(self.conn)
 
-    def get_hs2_server_address(self):
+    def get_hs2_server_address(self, zookeeper_address_str):
         import random
         from kazoo.client import KazooClient
 
         logging.basicConfig()
-        zk = KazooClient(hosts=self.zookeeper_address_str, read_only=True)
+        zk = KazooClient(hosts=zookeeper_address_str, read_only=True)
         zk.start()
 
         address = random.choice(zk.get_children('/hiveserver2'))
