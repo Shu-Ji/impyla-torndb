@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 
 setup(
@@ -8,4 +8,5 @@ setup(
     author="finn",
     url="https://github.com/Shu-Ji",
     py_modules=['impylatorndb'],
+    install_requires=['impyla'],
 )
