@@ -20,20 +20,23 @@ class Connection(object):
             zookeeper_address_str=None, **kwargs):
 
         # zookeeper_address_str = 'zk1.example.com:2181,zk2.example.com:2182'
-        self.zookeeper_address_str = zookeeper_address_str
-        self.host, self.port = host, port
+        self.connection_params = Row(**kwargs)
+        self.connection_params['host'] = host
+        self.connection_params['port'] = port
+        self.connection_params['auth_mechanism'] = auth_mechanism
+        self.connection_params['zookeeper_address_str'] = zookeeper_address_str
+
+        self.conn = None
         self.reconnect()
 
     def reconnect(self):
-        if self.zookeeper_address_str:
-            self.host, self.port = self.get_hs2_server_address()
+        kwargs = self.connection_params
 
-        if hasattr(self, 'conn'):
-            self.close(self.conn)
+        if kwargs.zookeeper_address_str:
+            kwargs.host, kwargs.port = self.get_hs2_server_address()
 
-        self.conn = connect(
-                host=self.host, port=self.port,
-                auth_mechanism=auth_mechanism, **kwargs)
+        self.close(self.conn)
+        self.conn = connect(**kwargs)
 
     def get(self, sql, sets=None):
         """
