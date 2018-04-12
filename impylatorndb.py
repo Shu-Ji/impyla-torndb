@@ -12,6 +12,9 @@ class Row(dict):
         except KeyError:
             raise AttributeError(name)
 
+    def __setattr__(self, key, value):
+        self[key] = value
+
 
 class Connection(object):
 
@@ -21,7 +24,7 @@ class Connection(object):
 
         # zookeeper_address_str = 'zk1.example.com:2181,zk2.example.com:2182'
         self.connection_params = Row(**kwargs)
-        self.connection_params['host'] = host
+        self.connection_params.host'] = host
         self.connection_params['port'] = port
         self.connection_params['auth_mechanism'] = auth_mechanism
 
