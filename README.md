@@ -31,12 +31,8 @@ query 和 get 返回值数据类型也完全一样; 惟一不同的是 execute �
 
     $ pipenv install git+https://github.com/Shu-Ji/impyla-torndb.git#egg=impylatorndb
 
-If you CAN NOT use the sasl C lib, you can use the pure-sasl python lib, else please install sasl by yourself.
 
-    $ pipenv install sasl
-
-
-And if some sasl error occurs, please uninstall sasl:
+If some sasl error occurs, please uninstall sasl:
 
     $ pipenv uninstall sasl
 
