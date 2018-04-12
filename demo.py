@@ -1,6 +1,6 @@
 # coding: u8
 
-from tornhivedb import Connection
+from impylatorndb import Connection
 
 
 user = 'myuser'
