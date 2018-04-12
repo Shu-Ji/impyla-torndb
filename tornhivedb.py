@@ -20,11 +20,19 @@ class Connection(object):
             zookeeper_hosts_str=None, **kwargs):
 
         # zookeeper_hosts_str = 'zk1.example.com:2181,zk2.example.com:2182'
-        if zookeeper_hosts_str:
-            host, port = self.get_hs2_server_address(zookeeper_hosts_str)
+        self.zookeeper_hosts_str = zookeeper_hosts_str
+        self.host, self.port = host, port
+        self.reconnect()
+
+    def reconnect(self):
+        if self.zookeeper_hosts_str:
+            self.host, self.port = self.get_hs2_server_address()
+
+        if hasattr(self, 'conn'):
+            self.close(self.conn)
 
         self.conn = connect(
-                host=host, port=port,
+                host=self.host, port=self.port,
                 auth_mechanism=auth_mechanism, **kwargs)
 
     def get(self, sql, sets=None):
@@ -61,6 +69,7 @@ class Connection(object):
         cursor = self.set_hiveconf_and_get_cursor(sets)
         self._execute(cursor, sql)
         self.close(cursor)
+        self.reconnect()
 
     def _execute(self, cursor, sql):
         try:
@@ -89,12 +98,12 @@ class Connection(object):
     def __del__(self):
         self.close(self.conn)
 
-    def get_hs2_server_address(self, zookeeper_hosts_str):
+    def get_hs2_server_address(self):
         import random
         from kazoo.client import KazooClient
 
         logging.basicConfig()
-        zk = KazooClient(hosts=zookeeper_hosts_str, read_only=True)
+        zk = KazooClient(hosts=self.zookeeper_hosts_str, read_only=True)
         zk.start()
 
         address = random.choice(zk.get_children('/hiveserver2'))
