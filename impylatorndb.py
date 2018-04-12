@@ -17,15 +17,15 @@ class Connection(object):
 
     def __init__(self,
             host='localhost', port=10000, auth_mechanism="PLAIN",
-            zookeeper_hosts_str=None, **kwargs):
+            zookeeper_address_str=None, **kwargs):
 
-        # zookeeper_hosts_str = 'zk1.example.com:2181,zk2.example.com:2182'
-        self.zookeeper_hosts_str = zookeeper_hosts_str
+        # zookeeper_address_str = 'zk1.example.com:2181,zk2.example.com:2182'
+        self.zookeeper_address_str = zookeeper_address_str
         self.host, self.port = host, port
         self.reconnect()
 
     def reconnect(self):
-        if self.zookeeper_hosts_str:
+        if self.zookeeper_address_str:
             self.host, self.port = self.get_hs2_server_address()
 
         if hasattr(self, 'conn'):
@@ -103,7 +103,7 @@ class Connection(object):
         from kazoo.client import KazooClient
 
         logging.basicConfig()
-        zk = KazooClient(hosts=self.zookeeper_hosts_str, read_only=True)
+        zk = KazooClient(hosts=self.zookeeper_address_str, read_only=True)
         zk.start()
 
         address = random.choice(zk.get_children('/hiveserver2'))

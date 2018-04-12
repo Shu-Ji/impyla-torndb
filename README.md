@@ -29,11 +29,9 @@ query 和 get 返回值数据类型也完全一样; 惟一不同的是 execute �
 
 ### Install
 
-    $ pipenv install
+    $ pipenv install git+https://github.com/Shu-Ji/impyla-torndb.git#egg=impylatorndb
 
-If you CAN NOT use the sasl C lib, you can use the pure-sasl python lib,
-
-else please install sasl by yourself.
+If you CAN NOT use the sasl C lib, you can use the pure-sasl python lib, else please install sasl by yourself.
 
     $ pipenv install sasl
 
@@ -42,29 +40,17 @@ And if some sasl error occurs, please uninstall sasl:
 
     $ pipenv uninstall sasl
 
+Then install pure-sasl:
+
+    $ pipenv install git+https://github.com/thobbs/pure-sasl.git#egg=puresasl
+
 Impyla will use the pure-sasl fallback.
-
-
-### 安装说明
-
-由于在我们的服务器上面安装 sasl 之后，不明原因，无法使用。
-
-所以使用了纯 python 实现的 pure-sasl 库。
-
-通过  pipenv install 之后，即会自动安装该库，但是，同时会安装 sasl 库。
-
-而 sasl 库用不了，所以安装完成之后手动卸载掉即可:
-
-pipenv uninstall sasl
-
-
-如果有 sasl，impyla 会使用他，如果他找不到 sasl，就会使用 pure-sasl，所以我们要卸载。
 
 
 ```python
 # coding: u8
 
-from tornhivedb import Connection
+from impylatorndb import Connection
 
 
 user = 'myuser'
@@ -77,8 +63,8 @@ sets = [
 # sets = 'set mapred.job.name = myjobname'
 
 # using zk
-zookeeper_hosts_str = 'zk1.xx.org:2181,zk2.xx.org:2181'
-db = Connection(zookeeper_hosts_str=zookeeper_hosts_str, user=user)
+zookeeper_address_str = 'zk1.xx.org:2181,zk2.xx.org:2181'
+db = Connection(zookeeper_address_str=zookeeper_address_str, user=user)
 
 # connect to hs2 directly
 #host = '127.0.0.1'
@@ -91,4 +77,3 @@ db.query(sql, sets)
 
 # or if you have not sets:
 # db.query(sql)
-```
