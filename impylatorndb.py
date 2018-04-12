@@ -31,7 +31,6 @@ class Connection(object):
         self.zookeeper_address_str = zookeeper_address_str
 
         self.conn = None
-        self.reconnect()
 
     def reconnect(self):
         kwargs = self.connection_params
@@ -76,7 +75,6 @@ class Connection(object):
         cursor = self.set_hiveconf_and_get_cursor(sets)
         self._execute(cursor, sql)
         self.close(cursor)
-        self.reconnect()
 
     def _execute(self, cursor, sql):
         try:
@@ -87,6 +85,8 @@ class Connection(object):
             raise(e)
 
     def set_hiveconf_and_get_cursor(self, sets=None):
+        self.reconnect()
+
         sets = sets or []
         if not isinstance(sets, list):
             sets = [sets]
