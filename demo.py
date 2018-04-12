@@ -13,8 +13,8 @@ sets = [
 # sets = 'set mapred.job.name = myjobname'
 
 # using zk
-zookeeper_hosts_str = 'zk1.xx.org:2181,zk2.xx.org:2181'
-db = Connection(zookeeper_hosts_str=zookeeper_hosts_str, user=user)
+zookeeper_address_str = 'zk1.xx.org:2181,zk2.xx.org:2181'
+db = Connection(zookeeper_address_str=zookeeper_address_str, user=user)
 
 # connect to hs2 directly
 #host = '127.0.0.1'
