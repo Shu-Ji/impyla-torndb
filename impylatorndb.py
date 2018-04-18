@@ -63,13 +63,18 @@ class Connection(object):
         else:
             return rows[0]
 
-    def query(self, sql, sets=None):
+    def iter(self, sql, sets=None):
         cursor = self.set_hiveconf_and_get_cursor(sets)
         self._execute(cursor, sql)
         column_names = [i[0] for i in cursor.description]
-        result = [Row(zip(column_names, row)) for row in cursor]
+
+        for row in cursor:
+            yield Row(zip(column_names, row))
+
         self.close(cursor)
-        return result
+
+    def query(self, sql, sets=None):
+        return list(self.iter(sql, sets))
 
     def execute(self, sql, sets=None):
         cursor = self.set_hiveconf_and_get_cursor(sets)
