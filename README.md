@@ -73,3 +73,7 @@ db.query(sql, sets)
 
 # or if you have not sets:
 # db.query(sql)
+
+# using iter
+for row in db.iteR(sql, sets):
+    print(row)

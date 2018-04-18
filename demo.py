@@ -23,7 +23,11 @@ db = Connection(zookeeper_address_str=zookeeper_address_str, user=user)
 
 
 sql = 'SELECT city_id FROM mydb.mytb LIMIT 10'
-db.query(sql, sets)
+print(db.query(sql, sets))
 
 # or if you have not sets:
 # db.query(sql)
+
+# using iter
+for row in db.iteR(sql, sets):
+    print(row)
