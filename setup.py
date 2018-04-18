@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name="impylatorndb",
-    version="0.0.1",
+    version="0.0.2",
     description="hiveserver2 impyla client used like torndb api",
     author="finn",
     url="https://github.com/Shu-Ji",
