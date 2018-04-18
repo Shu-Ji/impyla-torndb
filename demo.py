@@ -29,5 +29,5 @@ print(db.query(sql, sets))
 # db.query(sql)
 
 # using iter
-for row in db.iteR(sql, sets):
+for row in db.iter(sql, sets):
     print(row)
